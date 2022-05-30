@@ -18,5 +18,6 @@ import scala.io.StdIn.readLine
   println(s"$name has ${name.length} characters.")
 }
 
-def verify(name: String): Boolean =
+def verify(name: String): Boolean = {
   name.length == 0
+}
