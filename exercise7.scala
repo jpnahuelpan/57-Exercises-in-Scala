@@ -1,5 +1,4 @@
 import scala.io.StdIn.readLine
-import scala.util.{Try,Success,Failure}
 
 /** Area of a Rectangular Room
   *
@@ -16,11 +15,11 @@ import scala.util.{Try,Success,Failure}
   val lengthRoomFeet = readLine();
   println("What is the width of the room in feet?");
   val widthRoomFeet = readLine();
-  println(s"You entered dimensions of $lengthRoomFeet feet by $widthRoomFeet feet.");
   // validate input
   try {
       lrf = lengthRoomFeet.toFloat
       wrf = widthRoomFeet.toFloat
+      println(s"You entered dimensions of $lengthRoomFeet feet by $widthRoomFeet feet.");
       // conversion square feet to square meters.
       val squareFeet = lrf * wrf;
       val squareMeters = squareFeetToSquareMeters(squareFeet);
