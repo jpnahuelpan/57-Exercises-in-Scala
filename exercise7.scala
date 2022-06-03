@@ -28,8 +28,8 @@ import scala.io.StdIn.readLine
         s"$squareFeet square feet \n" +
         s"$squareMeters square meters. \n");
   } catch {
-      case e: NumberFormatException => println("Invalid input. Please try again. \n\n")
-      main
+      case e: NumberFormatException => println("Invalid input. Please try again. \n\n");
+      main;
   }
 }
 
