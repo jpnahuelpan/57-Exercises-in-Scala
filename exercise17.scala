@@ -4,7 +4,7 @@ import scala.io.StdIn.readLine
   *
   * @author Juan Pablo Nahuelpán
   *
-  * Pogram that prompts for your weight, gender,
+  * Program that prompts for your weight, gender,
   * number of drinks, the amount of alcohol by volume of the
   * drinks consumed, and the amount of time since your last
   * drink.
