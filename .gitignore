@@ -1,1 +1,4 @@
 .metals/
+.scala-build/
+.bsp/
+cs

@@ -10,31 +10,31 @@ import scala.math.pow
   * starting amount, the number of years to invest, the interest
   * rate, and the number of periods per year to compound.
   */
-@main def main: Unit = {
-  var getValues = true
-  var fa = 0.0d
-  while (getValues) {
-      try {
-        println("What is the principal amount?")
-        val principal = readLine.toFloat
-        println("What is the rate?")
-        val rateInterest = readLine.toFloat
-        println("What is the number of years?")
-        val years = readLine.toInt
-        println("What is the number of times the interest" +
-          "is compounded per year?")
-        val timesInterestCompoundedPerYear = readLine.toInt
-        // Calculate the amount at the end of the investment and display it.
-        for (i <- 0 to years) {
-          fa = calculateCompoundInterest(principal, rateInterest, i, timesInterestCompoundedPerYear)
+object exercise13 {
+  def main(args: Array[String]): Unit = {
+    var getValues = true
+    var fa = 0.0d
+    while (getValues) {
+        try {
+          println("What is the principal amount?")
+          val principal = readLine.toFloat
+          println("What is the rate?")
+          val rateInterest = readLine.toFloat
+          println("What is the number of years?")
+          val years = readLine.toInt
+          println("What is the number of times the interest" +
+            "is compounded per year?")
+          val timesInterestCompoundedPerYear = readLine.toInt
+          // Calculate the amount at the end of the investment and display it.
+          fa = calculateCompoundInterest(principal, rateInterest, years, timesInterestCompoundedPerYear)
           println(s"$principal invested at $rateInterest% for $years years \n" +
             f"compounded $timesInterestCompoundedPerYear time per year is  $$$fa%.2f." + "\n")
+          getValues = false
         }
-        getValues = false
-      }
-      catch {
-        case e: NumberFormatException => println("Invalid input. Please try again. \n\n")
-      }
+        catch {
+          case e: NumberFormatException => println("Invalid input. Please try again. \n\n")
+        }
+    }
   }
 }
 

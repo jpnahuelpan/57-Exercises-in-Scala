@@ -9,32 +9,40 @@ import scala.io.StdIn.readLine
   * then exit the program. Otherwise, display the largest number
   * of the three.
   */
-@main def main: Unit = {
-  var getValues = true
-  while (getValues) {
-    try {
-      println("Enter the first number:")
-      val number1 = readLine.toInt
-      println("Enter the second number:")
-      val number2 = readLine.toInt
-      println("Enter the third number:")
-      val number3 = readLine.toInt
-      // display results
-      val max = maxNumber(number1, number2, number3)
-      println(s"The largest number is ${max}.\n")
-      getValues = false
+object exercise22 {
+  def main(args: Array[String]): Unit = {
+    var getValues = true
+    var nums: List[Int] = List()
+    var i = 0
+    while (getValues) {
+      try {
+        println(s"Enter the ${i}th number:")
+        val num = readLine.toInt
+        if (!nums.contains(num)) then
+          nums = nums :+ num
+          println("Do you want to enter another number? <yes | y>")
+          val answer = readLine.toLowerCase
+          if (answer == "yes" || answer == "y")
+            i = i + 1
+          else
+            getValues = false
+        else
+          println("This number is already in the list. Please enter a different number \n\n")
+      }
+      catch {
+        case e: NumberFormatException => println("Invalid input. Please try again. \n\n")
+      }
     }
-    catch {
-      case e: NumberFormatException => println("Invalid input. Please try again. \n\n")
-    }
+    // display results
+    val max = maxNumber(nums)
+    println(s"The largest number is ${max}.\n")
   }
 }
 
-def maxNumber(number1: Int, number2: Int, number3: Int): Int = {
-  if (number1 > number2 && number1 > number3)
-    number1
-  else if (number2 > number1 && number2 > number3)
-    number2
-  else
-    number3
+def maxNumber(nums: List[Int]): Int = {
+  var max = nums(0)
+  for num <- nums do
+    if (num > max) then
+      max = num
+  return max
 }

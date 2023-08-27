@@ -4,32 +4,34 @@ import scala.io.StdIn.readLine
   *
   * @author Juan Pablo Nahuelpán
   *
-  * Pprogram that computes simple interest. Prompt for
+  * Program that computes simple interest. Prompt for
   * the principal amount, the rate as a percentage, and the time,
   * and display the amount accrued (principal + interest).
   */
-@main def main: Unit = {
-  var getValues = true
-  var fa = 0.0f
-  while (getValues) {
-      try {
-        println("Enter the principal:")
-        val principal = readLine.toFloat
-        println("Enter the rate of interest:")
-        val rateInterest = readLine.toFloat
-        println("Enter the number of years:")
-        val years = readLine.toInt
-        // Calculate the amount at the end of the investment and display it.
-        for (i <- 0 to years) {
-          fa = calculateSimpleInterest(principal, rateInterest, i)
-          println(s"After $i years at $rateInterest%, the investiment will \n" +
-            f"be worth $$$fa%.2f" + "\n")
+object exercise12 {
+  def main(args: Array[String]): Unit = {
+    var getValues = true
+    var fa = 0.0f
+    while (getValues) {
+        try {
+          println("Enter the principal:")
+          val principal = readLine.toFloat
+          println("Enter the rate of interest:")
+          val rateInterest = readLine.toFloat
+          println("Enter the number of years:")
+          val years = readLine.toInt
+          // Calculate the amount at the end of the investment and display it.
+          for (i <- 0 to years) {
+            fa = calculateSimpleInterest(principal, rateInterest, i)
+            println(s"After $i years at $rateInterest%, the investiment will \n" +
+              f"be worth $$$fa%.2f" + "\n")
+          }
+          getValues = false
         }
-        getValues = false
-      }
-      catch {
-        case e: NumberFormatException => println("Invalid input. Please try again. \n\n")
-      }
+        catch {
+          case e: NumberFormatException => println("Invalid input. Please try again. \n\n")
+        }
+    }
   }
 }
 

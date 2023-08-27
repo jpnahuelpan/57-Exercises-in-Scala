@@ -9,21 +9,23 @@ import scala.io.StdIn.readLine
   * in pounds. The program should prompt the user for weight
   * and height.
   */
-@main def main: Unit = {
-  var getValues = true
-  while (getValues) {
-    try {
-      println("What's your height(inches)?")
-      val height = readLine.toFloat
-      println("What's your weight(pounds)?")
-      val weight = readLine.toFloat
-      val getBMI = BMI(height, weight)
-      // Display BMI.
-      printBMI(getBMI)
-      getValues = false
-    }
-    catch {
-      case e: NumberFormatException => println("Invalid input. Please try again. \n\n")
+object exercise19 {
+  def main(args: Array[String]): Unit = {
+    var getValues = true
+    while (getValues) {
+      try {
+        println("What's your height(inches)?")
+        val height = readLine.toFloat
+        println("What's your weight(pounds)?")
+        val weight = readLine.toFloat
+        val getBMI = BMI(height, weight)
+        // Display BMI.
+        printBMI(getBMI)
+        getValues = false
+      }
+      catch {
+        case e: NumberFormatException => println("Invalid input. Please try again. \n\n")
+      }
     }
   }
 }

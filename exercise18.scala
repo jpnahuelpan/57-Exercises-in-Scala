@@ -9,29 +9,31 @@ import scala.io.StdIn.readLine
   * starting temperature. The program should prompt for the
   * type of conversion and then perform the conversion.
   */
-@main def main: Unit = {
-  val temperatures = List("C", "F")
-  var getValues = true
-  while (getValues) {
-    try {
-      println("Press C to convert from Fahrenheit to Celsius.\n" +
-        "Press F to convert from Celsius to Fahrenheit.\n" +
-        "Your choice: ")
-      var choice = readLine.toUpperCase
-      if (temperatures.contains(choice)) {
-        getTemperature(choice)
-        val temperature = readLine.toFloat
-        val result = conversion(choice, temperature)
-        PrintResult(choice, result)
-      } else{
-        throw Exception()
+object exercise18 {
+  def main(args: Array[String]): Unit = {
+    val temperatures = List("C", "F")
+    var getValues = true
+    while (getValues) {
+      try {
+        println("Press C to convert from Fahrenheit to Celsius.\n" +
+          "Press F to convert from Celsius to Fahrenheit.\n" +
+          "Your choice: ")
+        var choice = readLine.toUpperCase
+        if (temperatures.contains(choice)) {
+          getTemperature(choice)
+          val temperature = readLine.toFloat
+          val result = conversion(choice, temperature)
+          PrintResult(choice, result)
+        } else{
+          throw Exception()
+        }
+        
+        getValues = false
       }
-      
-      getValues = false
-    }
-    catch {
-      case e: NumberFormatException => println("Invalid input. Please try again. \n\n")
-      case e: Exception => println("Input a valid temperatures (C or F), thanks. \n\n")
+      catch {
+        case e: NumberFormatException => println("Invalid input. Please try again. \n\n")
+        case e: Exception => println("Input a valid temperatures (C or F), thanks. \n\n")
+      }
     }
   }
 }

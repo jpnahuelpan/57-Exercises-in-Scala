@@ -9,31 +9,33 @@ import scala.io.StdIn.readLine
   * drinks consumed, and the amount of time since your last
   * drink.
   */
-@main def main: Unit = {
-  val genders = List("female", "male")
-  var getValues = true
-  while (getValues) {
-    try {
-      println("What's your gender?")
-      val gender = readLine.toLowerCase
-      if (genders.contains(gender)){
-        println("What's your body weight(pounds)?")
-        val W = readLine.toFloat
-        println("how many drinks have you consumed?")
-        val A = drinkToOz(readLine.toFloat) // convert drinks to oz
-        println("What's the number of hours since your last drink?")
-        val H = readLine.toFloat // Hours
-        val r = if (gender == "male") 0.73f else 0.66f
-        val bac = BAC(A, W, H, r)
-        println(s"You BAC is ${bac}.")
-      } else{
-        throw Exception()
+object exercise17 {
+  def main(args: Array[String]): Unit = {
+    val genders = List("female", "male")
+    var getValues = true
+    while (getValues) {
+      try {
+        println("What's your gender?")
+        val gender = readLine.toLowerCase
+        if (genders.contains(gender)){
+          println("What's your body weight(pounds)?")
+          val W = readLine.toFloat
+          println("how many drinks have you consumed?")
+          val A = drinkToOz(readLine.toFloat) // convert drinks to oz
+          println("What's the number of hours since your last drink?")
+          val H = readLine.toFloat // Hours
+          val r = if (gender == "male") 0.73f else 0.66f
+          val bac = BAC(A, W, H, r)
+          println(s"You BAC is ${bac}.")
+        } else{
+          throw Exception()
+        }
+        getValues = false
       }
-      getValues = false
-    }
-    catch {
-      case e: NumberFormatException => println("Invalid input. Please try again. \n\n")
-      case e: Exception => println("Input a valid gender (female or male), thanks. \n\n")
+      catch {
+        case e: NumberFormatException => println("Invalid input. Please try again. \n\n")
+        case e: Exception => println("Input a valid gender (female or male), thanks. \n\n")
+      }
     }
   }
 }

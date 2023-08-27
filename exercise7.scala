@@ -8,28 +8,31 @@ import scala.io.StdIn.readLine
   * the user for the length and width of the room in feet. Then
   * display the area in both square feet and square meters.
   */
-@main def main: Unit = {
-  var lrf: Float = 0.0f;
-  var wrf: Float = 0.0f; 
-  println("What is the length of the room in feet?");
-  val lengthRoomFeet = readLine();
-  println("What is the width of the room in feet?");
-  val widthRoomFeet = readLine();
-  // validate input
+object exercise7 {
+  def main(args: Array[String]): Unit = {
+    // validate input
+    val (lrf, wrf) = validateInput
+    println(f"You entered dimensions of ${lrf} feet by ${wrf} feet.");
+    // conversion square feet to square meters.
+    val squareFeet = lrf * wrf;
+    val squareMeters = squareFeetToSquareMeters(squareFeet);
+    // display results
+    println("The area is \n" +
+      s"$squareFeet square feet \n" +
+      s"$squareMeters square meters. \n");
+  }
+}
+
+def validateInput: (Float, Float) = {
   try {
-      lrf = lengthRoomFeet.toFloat
-      wrf = widthRoomFeet.toFloat
-      println(s"You entered dimensions of $lengthRoomFeet feet by $widthRoomFeet feet.");
-      // conversion square feet to square meters.
-      val squareFeet = lrf * wrf;
-      val squareMeters = squareFeetToSquareMeters(squareFeet);
-      // display results
-      println("The area is \n" +
-        s"$squareFeet square feet \n" +
-        s"$squareMeters square meters. \n");
+      println("What is the length of the room in feet?")
+      val lengthRoomFeet = readLine().toFloat
+      println("What is the width of the room in feet?")
+      val widthRoomFeet = readLine().toFloat
+      return (lengthRoomFeet, widthRoomFeet)
   } catch {
-      case e: NumberFormatException => println("Invalid input. Please try again. \n\n");
-      main;
+      case e: NumberFormatException => println("Invalid input. Please try again. \n\n")
+      validateInput
   }
 }
 
