@@ -1,6 +1,4 @@
 import scala.io.StdIn.readLine
-import scala.util.control.Breaks.{break, breakable}
-import exercise23.msgGlobal
 
 /** Troubleshooting Car Issues
   *
@@ -83,9 +81,9 @@ def rootCondition(msg: String): Boolean =
 
 def rootAction(msg: String): Unit =
   if getAnswer(msg) then
-    msgGlobal = "Are the battery terminals corroded?"
+    exercise23.msgGlobal = "Are the battery terminals corroded?"
   else
-    msgGlobal = "Does the car make a clicking noise?"
+    exercise23.msgGlobal = "Does the car make a clicking noise?"
 
 def terminalsCorroded(msg: String): Boolean =
   msg == "Are the battery terminals corroded?"
@@ -103,7 +101,7 @@ def clickingNoiseAction(msg: String): Unit =
   if getAnswer(msg) then
     printF("Replace the battery.")
   else
-    msgGlobal = "Does the car crank up but fail to start?"
+    exercise23.msgGlobal = "Does the car crank up but fail to start?"
 
 def carCrank(msg: String): Boolean =
   msg == "Does the car crank up but fail to start?"
@@ -112,14 +110,14 @@ def carCrankAction(msg: String): Unit =
   if getAnswer(msg) then
     printF("Check spark plug connections.")
   else
-    msgGlobal = "Does the engine start and then die?"
+    exercise23.msgGlobal = "Does the engine start and then die?"
 
 def startAndDie(msg: String): Boolean =
   msg == "Does the engine start and then die?"
 
 def startAndDieAction(msg: String): Unit =
   if getAnswer(msg) then
-    msgGlobal = "Does your car have fuel injection?"
+    exercise23.msgGlobal = "Does your car have fuel injection?"
   else
     exercise23.next = false
 
