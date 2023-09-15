@@ -6,6 +6,16 @@ import scala.util.matching.Regex
   *
   * @author Juan Pablo Nahuelpán
   * 
+  * Program that determines the complexity of a given
+  * password based on these rules:
+  *  • A very weak password contains only numbers and is
+  *    fewer than eight characters.
+  *  • A weak password contains only letters and is fewer than
+  *    eight characters.
+  *  • A strong password contains letters and at least one
+  *    number and is at least eight characters.
+  *  • A very strong password contains letters, numbers, and
+  *    special characters and is at least eight characters.
   */
 @main def exercise25(): Unit =
   val password = readLine("Enter the password: ")
@@ -41,13 +51,13 @@ def containsLettersAndNumbers(string: String): Boolean =
   return containsOne(string, lettersRegex) && containsOne(string, numbersRegex)
 
 
-def veryWeekPassword(pass: String): Boolean =
+def veryWeakPassword(pass: String): Boolean =
   if onlyNumbers(pass) && !evaluateLength(pass) then
     return true
   else
     return false
 
-def weekPassword(pass: String): Boolean =
+def weakPassword(pass: String): Boolean =
   if onlyLetters(pass) && !evaluateLength(pass) then
     return true
   else
@@ -66,9 +76,9 @@ def veryStrongPassword(pass: String): Boolean =
     return false
 
 def passwordValidation(pass: String): String =
-  if veryWeekPassword(pass) then
+  if veryWeakPassword(pass) then
     return "very week"
-  else if weekPassword(pass) then
+  else if weakPassword(pass) then
     return "week"
   else if strongPassword(pass) then
     return "strong"
