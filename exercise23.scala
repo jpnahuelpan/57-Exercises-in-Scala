@@ -7,7 +7,10 @@ import scala.io.StdIn.readLine
   * Create a program that walks the user through
   * troubleshooting issues with a car.
   */
-object exercise23 {
+// Global variables
+var msgGlobal = "Is the car silent when you turn the key?"
+var next = true
+@main def exercise23(): Unit =
   val rulesEngine = RulesEngine(List(
       Rule(
         rootCondition,
@@ -35,12 +38,9 @@ object exercise23 {
       )
     )
   )
-  var msgGlobal = "Is the car silent when you turn the key?"
-  var next = true
-  def main(args: Array[String]): Unit =
-    while next do
-      rulesEngine.inferenceEngine(msgGlobal)
-}
+  while next do
+    rulesEngine.inferenceEngine(msgGlobal)
+
 
 class Rule(
   val condition: (String) => Boolean,
@@ -55,13 +55,13 @@ class Rule(
 class RulesEngine(private val _rules: List[Rule]):
   def inferenceEngine(msg: String): Unit =
     for rule <- _rules do
-      if (rule.condition(msg)) then
+      if rule.condition(msg) then
         rule.action(msg)
 end RulesEngine
 
 // Function to print solutions and break the while control structure.
 def breakF(): Unit =
-  exercise23.next = false
+  next = false
 
 def printF(msg: String): Unit =
   println(msg)
@@ -73,7 +73,7 @@ def evaluateAnswer(msg: String): Boolean = msg == "yes" || msg == "y"
 def getAnswer(msg: String): Boolean =
   println(s"${msg} <yes | no>")
   val answer = readLine.toLowerCase
-  return evaluateAnswer(answer)
+  evaluateAnswer(answer)
 
 // Conditions and actions.
 def rootCondition(msg: String): Boolean =
@@ -81,9 +81,9 @@ def rootCondition(msg: String): Boolean =
 
 def rootAction(msg: String): Unit =
   if getAnswer(msg) then
-    exercise23.msgGlobal = "Are the battery terminals corroded?"
+    msgGlobal = "Are the battery terminals corroded?"
   else
-    exercise23.msgGlobal = "Does the car make a clicking noise?"
+    msgGlobal = "Does the car make a clicking noise?"
 
 def terminalsCorroded(msg: String): Boolean =
   msg == "Are the battery terminals corroded?"
@@ -101,7 +101,7 @@ def clickingNoiseAction(msg: String): Unit =
   if getAnswer(msg) then
     printF("Replace the battery.")
   else
-    exercise23.msgGlobal = "Does the car crank up but fail to start?"
+    msgGlobal = "Does the car crank up but fail to start?"
 
 def carCrank(msg: String): Boolean =
   msg == "Does the car crank up but fail to start?"
@@ -110,16 +110,16 @@ def carCrankAction(msg: String): Unit =
   if getAnswer(msg) then
     printF("Check spark plug connections.")
   else
-    exercise23.msgGlobal = "Does the engine start and then die?"
+    msgGlobal = "Does the engine start and then die?"
 
 def startAndDie(msg: String): Boolean =
   msg == "Does the engine start and then die?"
 
 def startAndDieAction(msg: String): Unit =
   if getAnswer(msg) then
-    exercise23.msgGlobal = "Does your car have fuel injection?"
+    msgGlobal = "Does your car have fuel injection?"
   else
-    exercise23.next = false
+    next = false
 
 def haveFuelInjection(msg: String): Boolean =
   msg == "Does your car have fuel injection?"

@@ -9,45 +9,36 @@ import scala.io.StdIn.readLine
   * in pounds. The program should prompt the user for weight
   * and height.
   */
-object exercise19 {
-  def main(args: Array[String]): Unit = {
-    var getValues = true
-    while (getValues) {
-      try {
-        println("What's your height(inches)?")
-        val height = readLine.toFloat
-        println("What's your weight(pounds)?")
-        val weight = readLine.toFloat
-        val getBMI = BMI(height, weight)
-        // Display BMI.
-        printBMI(getBMI)
-        getValues = false
-      }
-      catch {
-        case e: NumberFormatException => println("Invalid input. Please try again. \n\n")
-      }
-    }
-  }
-}
+@main def exercise19(): Unit =
+  var getValues = true
+  while getValues do
+    try
+      println("What's your height(inches)?")
+      val height = readLine.toFloat
+      println("What's your weight(pounds)?")
+      val weight = readLine.toFloat
+      val getBMI = BMI(height, weight)
+      // Display BMI.
+      printBMI(getBMI)
+      getValues = false
+    catch
+      case e: NumberFormatException => println("Invalid input. Please try again. \n\n")
 
-def BMI(height: Float, weight: Float): Float = {
+
+def BMI(height: Float, weight: Float): Float =
   (weight /(height * height)) * 703
-}
 
-def printBMI(bmi: Float): Unit = {
+def printBMI(bmi: Float): Unit =
   println(s"Your BMI is ${bmi}.")
-  if (bmi > 18.5f & bmi < 25.0f) then
+  if bmi > 18.5f && bmi < 25.0f then
     println("You are within the ideal weight range.")
   else
     println(s"Your are ${stringOutRange(bmi)}. You should see your doctor.\n")
-}
 
-def stringOutRange(bmi: Float): String = {
-  if (bmi < 18.5f) then
-    return "underweight"
-  else if (bmi > 25.0f) then
+def stringOutRange(bmi: Float): String =
+  if bmi < 18.5f then
+    "underweight"
+  else if bmi > 25.0f then
      "overweight"
   else
     "...."
-}
-

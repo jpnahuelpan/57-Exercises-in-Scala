@@ -10,17 +10,14 @@ import java.time.LocalDate
   * prompt for your current age and the age you want to retire
   * and display the output.
   */
-object exercise6 {
-  def main(args: Array[String]): Unit = {
-    println("What is your current age?");
-    val currentAge = readLine();
-    println("At what age would you like to retire?");
-    val retireAge = readLine();
-    val currentYear = LocalDate.now.getYear;
-    // operate on numbers
-    val yearsLeft = retireAge.toInt - currentAge.toInt;
-    val retireYear = currentYear + yearsLeft;
-    println(s"You have $yearsLeft years left until you can retire. \n" +
-      s"It's $currentYear, so you can retire in $retireYear. \n");
-  }
-}
+@main def exercise6(): Unit = 
+  println("What is your current age?")
+  val currentAge = readLine()
+  println("At what age would you like to retire?")
+  val retireAge = readLine()
+  val currentYear = LocalDate.now.getYear
+  // operate on numbers
+  val yearsLeft = retireAge.toInt - currentAge.toInt
+  val retireYear = currentYear + yearsLeft
+  println(s"You have $yearsLeft years left until you can retire. \n" +
+    s"It's $currentYear, so you can retire in $retireYear. \n")

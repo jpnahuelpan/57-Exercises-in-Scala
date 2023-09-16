@@ -8,12 +8,9 @@ import scala.util.Random
   * First, query the username.
   * It then generates a random greeting using the entered name.
   */
-object exercise1 {
-  def main(args: Array[String]): Unit = {
-    println("What's your name?")
-    val name = readLine()
-    val greetings: List[String] = List("Hello", "Hi", "What's up", "Yo")
-    val randomGreeting = greetings(Random.nextInt(greetings.length))
-    println(s"$randomGreeting, $name, nice to meet you!")
-  }
-}
+@main def exercise1(): Unit =
+  println("What's your name?")
+  val name = readLine()
+  val greetings: List[String] = List("Hello", "Hi", "What's up", "Yo")
+  val randomGreeting = greetings(Random.nextInt(greetings.length))
+  println(s"$randomGreeting, $name, nice to meet you!")

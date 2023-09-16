@@ -20,7 +20,7 @@ def countChar(string: String): Int =
   var count = 0
   for c <- string do
     count += 1
-  return count
+  count
 
 def checkLength(string1: String, string2: String): Boolean =
   countChar(string1) == countChar(string2)
@@ -29,13 +29,13 @@ def countElements(set: Set[String]): Int =
   var count = 0
   for e <- set do
     count += 1
-  return count
+  count
 
 def setChar(string: String): Set[String] =
   var setChar: Set[String] = Set()
   for c <- string do
     setChar += c.toString
-  return setChar
+  setChar
 
 def checkElements(string1: String, string2: String): Boolean =
   countElements(setChar(string1)) == countElements(setChar(string2))
@@ -51,8 +51,8 @@ def isAnagram(string1: String, string2: String): Boolean =
           if c1 == c2 then
             count += 1
         string2Copy = string2Copy.replace(s"${c1}", "")
-      return count == stringLength
+      count == stringLength
     else
-      return false
+      false
   else
-    return false
+    false

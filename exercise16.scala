@@ -10,20 +10,14 @@ import scala.io.StdIn.readLine
   * to legally drive.” If the user is under sixteen, the program
   * should display “You are not old enough to legally drive.”
   */
-object exercise16 {
-  def main(args: Array[String]): Unit = {
-    var getValues = true
-    while (getValues) {
-      try {
-        println("What is your age?")
-        val age = readLine.toInt
-        val msg = if (age >= 16) "are" else "are not"
-        println(s"You ${msg} enough to legally drive.")
-        getValues = false
-      }
-      catch {
-        case e: NumberFormatException => println("Invalid input. Please try again. \n\n")
-      }
-    }
-  }
-}
+@main def exercise16(): Unit =
+  var getValues = true
+  while getValues do
+    try
+      println("What is your age?")
+      val age = readLine.toInt
+      val msg = if (age >= 16) "are" else "are not"
+      println(s"You ${msg} enough to legally drive.")
+      getValues = false
+    catch
+      case e: NumberFormatException => println("Invalid input. Please try again. \n\n")

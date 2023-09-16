@@ -11,33 +11,27 @@ import scala.io.StdIn.readLine
   * the program should display “Welcome!” If it doesn’t match,
   * the program should display “I don’t know you.”
   */
-object exercise15 {
-  def main(args: Array[String]): Unit = {
-    val users = Map(("José" -> 12345), ("Catalina" -> 14325), ("Marcos" -> 17293)) // hardcode xd
+@main def exercise15(): Unit =
+    val users = Map(
+      "José" -> 12345,
+      "Catalina" -> 14325,
+      "Marcos" -> 17293
+    ) // hardcode xd
     var getValues = true
-    while (getValues) {
-      try {
+    while getValues do
+      try
         println("Who is the user?")
         val user = readLine.toString
-        if (users.contains(user)){
+        if users.contains(user) then
           println("What is the password?")
           val password = readLine.toInt
-          if (Some(password) == users.get(user)){
+          if Some(password) == users.get(user) then
               println("Welcome!")
-          }
-          else {
+          else
             println("I don't know you.")
-          }
-        }
-        else {
+        else
           throw Exception()
-        }
         getValues = false
-      }
-      catch {
+      catch
         case e: NumberFormatException => println("Invalid password. Please try again. \n\n")
         case e: Exception => println("This user don't exist. \n\n")
-      }
-    }
-  }
-}

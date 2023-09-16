@@ -28,11 +28,11 @@ def evaluateLength(string: String): Boolean =
 
 def onlyNumbers(string: String): Boolean =
   val regex = "[0-9]+".r
-  return regex.matches(string)
+  regex.matches(string)
 
 def onlyLetters(string: String): Boolean =
   val regex = "[A-Za-z]+".r
-  return regex.matches(string)
+  regex.matches(string)
 
 def containsOne(string: String, regex: Regex): Boolean =
   boundary:
@@ -43,47 +43,47 @@ def containsOne(string: String, regex: Regex): Boolean =
 
 def containsSpecialCharacters(string: String): Boolean =
   val regex = "[^A-Za-z0-9]".r
-  return containsOne(string, regex)
+  containsOne(string, regex)
 
 def containsLettersAndNumbers(string: String): Boolean =
   val lettersRegex = "[A-Za-z]".r
   val numbersRegex = "[0-9]".r
-  return containsOne(string, lettersRegex) && containsOne(string, numbersRegex)
+  containsOne(string, lettersRegex) && containsOne(string, numbersRegex)
 
 
 def veryWeakPassword(pass: String): Boolean =
   if onlyNumbers(pass) && !evaluateLength(pass) then
-    return true
+    true
   else
-    return false
+    false
 
 def weakPassword(pass: String): Boolean =
   if onlyLetters(pass) && !evaluateLength(pass) then
-    return true
+    true
   else
-    return false
+    false
 
 def strongPassword(pass: String): Boolean =
   if containsLettersAndNumbers(pass) && !containsSpecialCharacters(pass) && evaluateLength(pass) then
-    return true
+    true
   else
-    return false
+    false
 
 def veryStrongPassword(pass: String): Boolean =
   if containsLettersAndNumbers(pass) && containsSpecialCharacters(pass) && evaluateLength(pass) then
-    return true
+    true
   else
-    return false
+    false
 
 def passwordValidation(pass: String): String =
   if veryWeakPassword(pass) then
-    return "very week"
+    "very weak"
   else if weakPassword(pass) then
-    return "week"
+    "weak"
   else if strongPassword(pass) then
-    return "strong"
+    "strong"
   else if veryStrongPassword(pass) then
-    return "very strong"
+    "very strong"
   else
     val msg = if (onlyLetters(pass)) "long alphabetic" else "long numeric"
-    return msg
+    msg
