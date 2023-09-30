@@ -43,7 +43,7 @@ def strNumbers(numbersList: ArrayBuffer[Int]): String =
   string.dropRight(1)
 
 def printResults(numbersList: ArrayBuffer[Int]): Unit =
-  // I used instantiation to catch errors when trying to calculate
+  // I used ejecution before print to catch errors when trying to calculate
   // with an empty array and prevent the messages of already
   // calculated operations from being printed.
   val a = strNumbers(numbersList)
