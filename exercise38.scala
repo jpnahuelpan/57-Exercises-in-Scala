@@ -1,5 +1,4 @@
 import scala.io.StdIn.readLine
-import scala.util.Random.nextInt
 import scala.collection.mutable.ListBuffer
 
 /** Filtering Values
