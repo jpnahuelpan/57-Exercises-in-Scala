@@ -1,4 +1,3 @@
-import scala.io.StdIn.readLine
 
 /** Name Sorter
   *
