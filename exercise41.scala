@@ -6,8 +6,8 @@
   * Then print the sorted list to a file.
   */
 @main def exercise41(): Unit =
-  val inputFile = "data/exe_41_input.txt"
-  val outputFile = "data/exe_41_output.txt"
+  val inputFile = "data/exe41/input.txt"
+  val outputFile = "data/exe41/output.txt"
   val data = readData(inputFile)
   val sortedData = sortData(data)
   printTable(sortedData, outputFile)
