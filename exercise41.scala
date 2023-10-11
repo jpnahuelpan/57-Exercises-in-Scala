@@ -18,8 +18,10 @@ def readData(fileName: String): List[String] =
   import scala.collection.mutable.ListBuffer
 
   val data: ListBuffer[String] = ListBuffer()
-  for line <- fromFile(fileName).getLines do
+  val file = fromFile(fileName)
+  for line <- file.getLines do
     data.addOne(line)
+  file.close()
   data.toList
 
 def saveData(data: List[String], fileName: String): Unit =
