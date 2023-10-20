@@ -5,9 +5,6 @@
   * 
   * Program that reads in a file and counts the frequency of words in the file.
   * 
-  * Note:
-  *   Execution comand should be:
-  *   - scala-cli exercise44.scala --dep com.lihaoyi::upickle:3.1.3 --dep com.lihaoyi::os-lib:0.9.1
   */
 @main def exercise45(): Unit =
   val filePath = "data/exe45/words.txt"
