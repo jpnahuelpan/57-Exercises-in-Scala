@@ -1,36 +1,36 @@
 
-/** Word Frequency Finder
+/** Word Finder
   *
   * @author Juan Pablo Nahuelpán
   * 
-  * Program that reads in a file and counts the frequency of words in the file.
+  * Program that reads in a file and look for all occurrences
+  * of the word 'utilize'. Replace each occurrence with 'use'.
   * 
   */
 @main def exercise45(): Unit =
-  val filePath = "data/exe45/words.txt"
-  val data = readData(filePath)
-  histogram(data)
+  val filePath = "data/exe45/input.txt"
+  val filePathOutput = "data/exe45/output.txt"
+  val inputText = readText(filePath)
+  val outputText = newText(inputText, "utilize", "use")
+  println(s"Input text: \n $inputText\n")
+  println(s"Output text: \n $outputText\n")
+  saveText(outputText, filePathOutput)
+  println(s"The output text was saved in $filePathOutput\n")
 
-def readData(fileName: String): List[String] =
+def newText(text: String, wordToReplace: String, newWord: String): String =
+  text.replace(wordToReplace, newWord)
+
+def readText(fileName: String): String =
   import scala.io.Source.fromFile
-  import scala.collection.mutable.ListBuffer
-  var data: ListBuffer[String] = ListBuffer()
+  var text: String = ""
   val file = fromFile(fileName)
   for line <- file.getLines do
-    val wordsListLine = line.split(" ").map(_.trim).toList
-    wordsListLine.map(newWord => data.addOne(newWord))
+    text += " " + line
   file.close()
-  data.toList
+  text
 
-def countWords(words: List[String]): List[(String, Int)] =
-  words.groupBy(x => x).map((k, v) => (k, v.length)).toList.sortBy(-_(1))
-
-def printWord(word: String, frequency: Int): Unit =
-  val space = 10 - word.length
-  println(s"$word:" + " " * space + "*" * frequency)
-
-def histogram(words: List[String]): Unit =
-  val countedWords = countWords(words)
-  countedWords.foreach((word, frequency) =>
-    printWord(word, frequency)
-  )
+def saveText(text: String, fileName: String): Unit =
+  import java.io.PrintWriter
+  val output = new PrintWriter(fileName)
+  output.write(s"$text")
+  output.close()
