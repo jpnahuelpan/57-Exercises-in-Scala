@@ -2,3 +2,6 @@
 .scala-build/
 .bsp/
 cs
+
+# api keys
+src/exe_48/ApiKey.scala
