@@ -5,8 +5,9 @@ import org.http4s.circe.jsonOf
 import io.circe.generic.auto.*
 import cats.effect.unsafe.implicits.global
 import scala.io.StdIn.readLine
+import io.github.cdimascio.dotenv.Dotenv
 // local import
-import src.exe_48.{WeatherData, key}
+import src.exe_48.{WeatherData}
 
 /** Grabbing the Weather
   *
@@ -18,18 +19,20 @@ import src.exe_48.{WeatherData, key}
   * Note:
   *   Execution comand should be:
   *     scala-cli exercise48.scala --dep org.http4s::http4s-ember-client:0.23.24 --dep org.http4s::http4s-circe:0.23.24 \
-        --dep io.circe::circe-generic:0.14.6 --dep org.slf4j:slf4j-nop:2.0.9 src/exe_48
+        --dep io.circe::circe-generic:0.14.6 --dep io.github.cdimascio:dotenv-java:3.0.0 \
+        --dep org.slf4j:slf4j-nop:2.0.9 src/exe_48
   *
   *   The only purpose of slf4j-nop is to prevent client log messages from being printed in the prompt.
   *
   *   Regarding the API Key, it should be requested by registering at http://openweathermap.org.
-  *   Then, create a file named 'ApiKey.scala' in the src/exe_48 folder and inside it, add the following:
+  *   Then, create a file named '.env' in the root of the folder and inside it, add the following:
   *
-  *   1| package src.exe_48
-  *   2| val key: String = "<your key>"
+  *   OPM_API_KEY = "<your key>"
   *
   */
 @main def exercise48(): Unit =
+  val dotenv = Dotenv.load()
+  val key = dotenv.get("OPM_API_KEY")
   var getValues = true
   while getValues do
     try
