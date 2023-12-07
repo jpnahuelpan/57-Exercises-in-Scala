@@ -1,3 +1,9 @@
+//> using lib "org.http4s::http4s-ember-client:0.23.24"
+//> using lib "org.http4s::http4s-circe:0.23.24"
+//> using lib "io.circe::circe-generic:0.14.6"
+//> using lib "org.scalafx:scalafx_3:21.0.0-R32"
+//> using lib "org.slf4j:slf4j-nop:2.0.9"
+
 import scalafx.Includes._
 import scalafx.application.JFXApp3
 import scalafx.scene.{Scene}
@@ -18,8 +24,7 @@ import src.exe_49.{extractImagesUrls}
   * 
   * Note:
   *   Execution comand should be:
-  *     scala-cli exercise49.scala --dep org.http4s::http4s-ember-client:0.23.24 --dep org.http4s::http4s-circe:0.23.24 \
-        --dep io.circe::circe-generic:0.14.6 --dep org.scalafx:scalafx_3:21.0.0-R32 --dep org.slf4j:slf4j-nop:2.0.9 src/exe_49
+  *     scala-cli exercise49.scala src/exe_49
   *
   *   The only purpose of slf4j-nop is to prevent client log messages from being printed in the prompt.
   *

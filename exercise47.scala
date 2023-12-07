@@ -1,3 +1,8 @@
+//> using lib "org.http4s::http4s-ember-client:0.23.24"
+//> using lib "org.http4s::http4s-circe:0.23.24"
+//> using lib "io.circe::circe-generic:0.14.6"
+//> using lib "org.slf4j:slf4j-nop:2.0.9"
+
 import cats.effect.IO
 import cats.effect.unsafe.IORuntime
 import org.http4s.ember.client.EmberClientBuilder
@@ -15,8 +20,7 @@ import src.exe_47.{Data, printThePeople}
   * 
   * Note:
   *   Execution comand should be:
-  *     scala-cli exercise47.scala --dep org.http4s::http4s-ember-client:0.23.23 --dep org.http4s::http4s-circe:0.23.23 \
-        --dep io.circe::circe-generic:0.14.6 --dep org.slf4j:slf4j-nop:2.0.9 src/exe_47
+  *     scala-cli exercise47.scala src/exe_47
   *
   *   The only purpose of slf4j-nop is to prevent client log messages from being printed in the prompt.
   */

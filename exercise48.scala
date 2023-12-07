@@ -1,3 +1,9 @@
+//> using lib "org.http4s::http4s-ember-client:0.23.24"
+//> using lib "org.http4s::http4s-circe:0.23.24"
+//> using lib "io.circe::circe-generic:0.14.6"
+//> using lib "io.github.cdimascio:dotenv-java:3.0.0"
+//> using lib "org.slf4j:slf4j-nop:2.0.9"
+
 import cats.effect.IO
 import cats.effect.unsafe.IORuntime
 import org.http4s.ember.client.EmberClientBuilder
@@ -18,9 +24,7 @@ import src.exe_48.{WeatherData}
   * 
   * Note:
   *   Execution comand should be:
-  *     scala-cli exercise48.scala --dep org.http4s::http4s-ember-client:0.23.24 --dep org.http4s::http4s-circe:0.23.24 \
-        --dep io.circe::circe-generic:0.14.6 --dep io.github.cdimascio:dotenv-java:3.0.0 \
-        --dep org.slf4j:slf4j-nop:2.0.9 src/exe_48
+  *     scala-cli exercise48.scala src/exe_48
   *
   *   The only purpose of slf4j-nop is to prevent client log messages from being printed in the prompt.
   *

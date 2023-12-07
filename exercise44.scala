@@ -1,3 +1,6 @@
+//> using lib "com.lihaoyi::os-lib:0.9.1"
+//> using lib "com.lihaoyi::upickle:3.1.3"
+
 import scala.io.StdIn.readLine
 import upickle.default.{
   ReadWriter => RW,
@@ -14,7 +17,7 @@ import upickle.default.{
   * 
   * Note:
   *   Execution comand should be:
-  *   - scala-cli exercise44.scala --dep com.lihaoyi::upickle:3.1.3 --dep com.lihaoyi::os-lib:0.9.1
+  *     scala-cli exercise44.scala
   */
 @main def exercise44(): Unit =
   val filePath = "data/exe44/data.json"
