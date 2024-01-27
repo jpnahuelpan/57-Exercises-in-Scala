@@ -4,5 +4,6 @@
 cs
 
 # api keys
-src/exe_48/ApiKey.scala
 *.env
+# firestore credentials (on firebase)
+scalaexercise51.json
