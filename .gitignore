@@ -7,3 +7,6 @@ cs
 *.env
 # firestore credentials (on firebase)
 scalaexercise51.json
+
+#redis dump
+*.rdb
