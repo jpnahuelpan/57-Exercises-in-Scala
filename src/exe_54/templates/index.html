@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise 54 scala</title>
+</head>
+<body>
+  <h2>Capture form</h2>
+
+  <form id="myForm">
+    <label for="name">URL</label>
+    <input type="text" id="urlId" name="url" required><br>
+
+    <button type="submit">Send</button>
+  </form>
+  <table id="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Short URL</th>
+        <th>Long URL</th>
+        <th>Visits</th>
+        <th>Stats</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+<script>
+  fetch('http://localhost:8080/api/data')
+    .then(response => response.json())
+    .then(data => {
+      const tbody = document.querySelector('#table tbody');
+      var currentUrl = window.location.href;
+      data.forEach(item => {
+        const json = JSON.parse(item);
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${Object.values(json._id)}</td>
+          <td><a href="javascript:void(0)" onclick=openLinkAndReload('${currentUrl + json.shortURL}')>${currentUrl + json.shortURL}</a></td>
+          <td>${json.longURL}</td>
+          <td>${json.visits}</td>
+          <td><a href="${currentUrl + json.shortURL}/stats" target="_blank">${currentUrl + json.shortURL}/stats</a></td>
+        `;
+        tbody.appendChild(row);
+      });
+    })
+    .catch(error => {
+      console.error('Error in get data:', error);
+    });
+  document.getElementById("myForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    // Capture form
+    const formData = {
+      url: document.getElementById("urlId").value
+    };
+    // send data to the api.
+    fetch("http://localhost:8080/api/insert", {
+      method: "POST",
+      headers: {
+      'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(response => {
+      if (!response.ok) {
+        document.getElementById("urlId").value = "";
+        alert(`Error code: ${response.status}\nMessage error: ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data.message === "ok") {
+        window.location.reload();
+      } else {
+        document.getElementById("urlId").value = "";
+        alert(data.message);
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+  });
+  function openLinkAndReload(url) {
+    // Abrir el enlace en una nueva pestaña
+    window.open(url);
+
+    // Recargar la página actual
+    window.location.reload();
+  }
+</script>
+</body>
+</html>
+

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise 54 scala</title>
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <canvas id="myChart"></canvas>
+
+
+<script>
+  const url = window.location.href;
+  const segments = url.split('/');
+  const shortURL = segments[3];
+  fetch(`http://localhost:8080/api/visits/${shortURL}`)
+    .then(response => response.json())
+    .then(data => {
+      const tbody = document.querySelector('#table tbody');
+      var currentUrl = window.location.href;
+      let visitsPerDay = {};
+      data.forEach(item => {
+        const json = JSON.parse(item);
+        const date = new Date(Object.values(json.timestamp));
+        const day = date.toISOString().split('T')[0];
+        visitsPerDay[day] = (visitsPerDay[day] || 0) + 1;
+      });
+      const labels = Object.keys(visitsPerDay);
+      const dataPoints = labels.map(label => visitsPerDay[label]);
+
+      const config = {
+          type: 'bar',
+          data: {
+              labels: labels,
+              datasets: [{
+                  label: 'Visits per day',
+                  data: dataPoints,
+                  backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                  borderColor: 'rgba(54, 162, 235, 1)',
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      };
+
+      var myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+      );
+    })
+    .catch(error => {
+      console.error('Error in get data:', error);
+    });
+</script>
+</body>
+</html>
