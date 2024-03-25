@@ -59,7 +59,7 @@ import src.exe_54.{URL, VISIT}
   *
   * @author Juan Pablo Nahuelpán
   * 
-  * Simple command-line todo list program that meets the following specifications:
+  * Simple web app that meets the following specifications:
   *   • The program should have a form that accepts the long
   *     URL.
   *   • The program should generate a short local URL like
