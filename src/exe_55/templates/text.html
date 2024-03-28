@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text editor</title>
+</head>
+<body>
+  <button onclick="canEdit()">Edit text</button>
+  <form id="myForm">
+    <textarea id="textId" name="text" rows="4" cols="50" maxlength="255" disabled="true"></textarea><br>
+    <input type="submit" value="Send">
+  </form>
+
+  <script>
+    const urlLocal = window.location.href;
+    const segments = urlLocal.split('/');
+    const id = segments[3];
+    fetch(`http://localhost:8080/api/text/${id}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error');
+        }
+        return response.json();
+      })
+      .then(data => {
+        document.getElementById('textId').innerHTML = data.text;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const formData = {
+        id: id,
+        text: document.getElementById("textId").value
+      };
+      console.log(id);
+      fetch('http://localhost:8080/api/update', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => {
+        if (!response.ok) {
+          alert(`Error code: ${response.status}\nMessage error: ${response.statusText}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.response === "ok") {
+          alert(data.message);
+          window.location.reload();
+        } else {
+          alert(data.response);
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
+    });
+  function canEdit() {
+    var textarea = document.getElementById("textId");
+    textarea.disabled = false;
+  }
+  </script>
+</body>
+</html>

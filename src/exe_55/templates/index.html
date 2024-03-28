@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise 55 scala</title>
+</head>
+<body>
+  <h2>Capture form</h2>
+
+  <form id="myForm">
+    <label for="text">Enter the text:</label><br>
+    <textarea id="textId" name="text" rows="4" cols="50" maxlength="255"></textarea><br>
+    <input type="submit" value="Send">
+  </form>
+  <table id="table">
+    <thead>
+      <tr>
+        <th>Text url list</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+<script>
+  fetch('http://localhost:8080/api/data')
+    .then(response => response.json())
+    .then(data => {
+      const tbody = document.querySelector('#table tbody');
+      var currentUrl = window.location.href;
+      console.log(data);
+      data.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><a href="${currentUrl + item}" target="_blank">${currentUrl + item}</a></td>
+        `;
+        tbody.appendChild(row);
+      });
+    })
+    .catch(error => {
+      console.error('Error in get data:', error);
+    });
+  document.getElementById("myForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    // Capture form
+    const formData = {
+      text: document.getElementById("textId").value
+    };
+    // send data to the api.
+    fetch("http://localhost:8080/api/insert", {
+      method: "POST",
+      headers: {
+      'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(response => {
+      if (!response.ok) {
+        document.getElementById("textId").value = "";
+        alert(`Error code: ${response.status}\nMessage error: ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data.message === "ok") {
+        window.location.reload();
+      } else {
+        document.getElementById("textId").value = "";
+        alert(data.message);
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+  });
+  function openLinkAndReload(url) {
+    window.open(url);
+
+    window.location.reload();
+  }
+</script>
+</body>
+</html>
+
