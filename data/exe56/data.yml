@@ -1,0 +1,8 @@
+!Items
+items:
+- name: Xbox One
+  serialNumber: AXB124AXY
+  value: 399.0
+- name: Samsung TV
+  serialNumber: S40AZBDE4
+  value: 599.99
