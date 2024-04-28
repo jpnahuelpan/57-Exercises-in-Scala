@@ -1,6 +1,6 @@
 # This is my solution in Scala lang to the book:
 # Exercises for Programmers
-## 57 Challenges to Develo you Coding Skills
+## 57 Challenges to Develop you Coding Skills
 # by Brian P. Hogan.
 
 
